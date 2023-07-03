@@ -10,7 +10,11 @@ typedef double db;
 class Solution {
 public:
     int maxLevelSum(TreeNode* root) {
+        // sum: sum of answer level
+        // ans: answer
+        // level: current level
         int ans = 1, sum = root->val, level = 0;
+        // current level nodes
         queue<TreeNode*> q;
         q.push(root);
 
@@ -18,6 +22,7 @@ public:
             int temp = 0;
             queue<TreeNode*> temp_q;
 
+            // move to new level
             ++level;
             while (q.empty() != true) {
                 temp += q.front()->val;
@@ -28,6 +33,7 @@ public:
                 q.pop();
             }
             q = temp_q;
+
             if (sum < temp) {
                 sum = temp;
                 ans = level;
