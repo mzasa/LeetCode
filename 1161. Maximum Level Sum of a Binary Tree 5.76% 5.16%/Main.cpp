@@ -1,35 +1,3 @@
-﻿#include <iostream>
-#include <string>
-#include <string.h>
-#include <math.h>
-#include <vector>
-#include <algorithm>
-#include <stdio.h>
-#include <map>
-#include <set>
-#include <iomanip>
-#include <stdlib.h>
-#include <stack>
-#include <queue>
-
-
-using namespace std;
-
-struct TreeNode {
-     int val;
-     TreeNode *left;
-     TreeNode *right;
-     TreeNode() : val(0), left(nullptr), right(nullptr) {}
-     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- };
-
-struct ListNode {
-    int val;
-    ListNode* next;
-    ListNode(int x) : val(x), next(NULL) {}
-};
-
 #define f(a,b) for(int i=a;i<b;++i)
 #define ft(a,b) for(int z=a;z<b;++z)
 #define f1(a,b) for(int j=a;j<b;++j)
@@ -42,7 +10,11 @@ typedef double db;
 class Solution {
 public:
     int maxLevelSum(TreeNode* root) {
+        // sum: sum of answer level
+        // ans: answer
+        // level: current level
         int ans = 1, sum = root->val, level = 0;
+        // current level nodes
         queue<TreeNode*> q;
         q.push(root);
 
@@ -50,6 +22,7 @@ public:
             int temp = 0;
             queue<TreeNode*> temp_q;
 
+            // move to new level
             ++level;
             while (q.empty() != true) {
                 temp += q.front()->val;
@@ -60,6 +33,7 @@ public:
                 q.pop();
             }
             q = temp_q;
+
             if (sum < temp) {
                 sum = temp;
                 ans = level;
